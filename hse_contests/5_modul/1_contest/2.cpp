@@ -34,44 +34,41 @@ int main() {
 
         }
     }
-    // cout << 1 << "\n"; 
+
+    // доли макс паросочетнаия читаем
     vector<int> pA(m + 1, 0) ; 
     vector<int> pB(n + 1, 0) ; 
 
     for (int i = 1 ; i <= m ; i++ ) {
-        // int p ; cin>> p ; 
         int p = readInt();  
         pA[i] = ( p== 0 ? 0 : p + m ) ; 
         pB[p] = i ; 
     }
-    // cout << 2 << "\n"; 
 
     vector<vector<int> > ost_graph(m + n+1) ; 
 
-    // A->B
+    // A->B (те добалвяем только те ребра , которые которые есть в исходном графе )
     for (int i = 1 ; i <= m ; i++) {
         for (auto j : graph[i]) {
-            auto p = std::make_pair(i, j) ; 
-            if (pA[i] != j)  {
+            if (pA[i] != j)  { 
                 ost_graph[i].push_back(j) ; 
             }
         }
     }
-    // cout << 3 << "\n"; 
-    //B->A
+
+    //B->A (только ребра из паросочетания )
     for ( int i = 1 ; i <= m ; i++) {
         if (pA[i] != 0 ) {
             ost_graph[pA[i]].push_back(i) ; 
         }
     }
-    // cout << 4 << "\n"; 
 
     for (int i =1 ; i <= m ; i++) {
         if (pA[i] ==0 ) {
             dfs(i , ost_graph) ; 
         }
     }
-    // cout << 5 << "\n"; 
+
 
     vector<int> A ; 
     vector<int> B ; 
@@ -81,7 +78,6 @@ int main() {
             A.push_back(a);
         }
     }
-    // cout << 6 << "\n"; 
 
     for (int b = 1 + m; b <= n+m ; b++) {
         if (used[b]) {
@@ -89,21 +85,17 @@ int main() {
         }
     }
     
-    // cout << A.size() + B.size() << "\n"; 
-    writeInt(A.size() + B.size() , '\n'); ;
 
-    // cout << A.size() << " " ; 
+    writeInt(A.size() + B.size() , '\n'); ;
     writeInt(A.size() , ' ');
 
     for ( auto el : A) {
-        // cout  << el << " " ; 
         writeInt(el , ' ');
     }
-    // cout << "\n" << B.size() << " " ; 
+
     writeChar('\n');
     writeInt(B.size() , ' ');
     for (auto el : B) {
-        // cout << el << " "; 
         writeInt(el , ' ');
     }
     return 0;

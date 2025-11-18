@@ -28,19 +28,7 @@ bool dfs(int v ) {
     return false;
 }
 
-void print_graph() {
-    int i = 1; 
-    for (auto s : graph) {
-        if (s.empty()) continue;
-        cout <<  i << ": " ; 
-        for (auto el : s) {
-            cout << el << " " ; 
-        }
-        i++; 
-        cout << '\n'; 
-    }
 
-}
 
 int main() {
     auto start = chrono::high_resolution_clock::now();

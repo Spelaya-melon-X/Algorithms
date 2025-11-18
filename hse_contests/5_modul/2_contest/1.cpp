@@ -111,15 +111,6 @@ int main() {
         // add(a , b , 1) ;
     }
 
-
-    //! ошибка , вместо того , чтобы находить пути от разных вершин , необходимо несколько раз запускаться от начальной вершины , ибо мы хотим найти пути от одной вершины к другой
-    // int matching = 0 ; 
-    // for (int v = 0 ; v < N-1 ; v++) { 
-    //     if (dfs(v)){
-    //         matching++; 
-    //         fill(used.begin(), used.end(), 0);
-    //     }
-    // }
     int matching = 0;
     while (matching < 2) {
         fill(used.begin(), used.end(), false);
@@ -130,66 +121,11 @@ int main() {
         }
     }
 
-
-
     for (const Edge& e : edges) {
         if (e.c > 0 && e.f == 1) {
             graph[e.a].push_back(e.b);
         }
     }
-
-    // if (matching == 2) {
-    //     std::vector<int> path1 = get_path() ;
-    //     std::vector<int> path2 = get_path() ;
-
-    //     if (path1.size() == 0 || path2.size() == 0) {
-    //         cout << "NO" << endl;
-    //         return 0;
-    //     }else {
-    //         cout << "YES" << endl;
-    //         for ( auto el : path1) {
-    //             cout << el+1 << " " ; 
-    //         }
-    //         cout << "\n" ; 
-    //         for ( auto el : path2) {
-    //             cout << el+1 << " " ; 
-    //         }
-    //         cout << "\n" ;
-    //     }
-
-    // }else {
-    //     cout << "NO" << endl;
-    // }
-    //  if (matching >= 2) {
-    //     vector<int> p1 = get_path_2();
-    //     vector<int> p2 = get_path_2();
-
-    //     if (p1.empty() || p2.empty()) {
-    //         cout << "YES\n";
-    //         if (p1.empty()){
-    //             cout << St + 1 << " "<< "\n";
-    //         } else {
-    //             for (int x : p1) cout << x + 1 << " ";
-    //             cout << "\n";
-    //         }
-    //         if (p2.empty()){
-    //             cout << St + 1 << " "<< "\n";
-    //         } else {
-    //             for (int x : p2) cout << x + 1 << " ";
-    //             cout << "\n";
-    //         }
-
-
-    //     } else {
-    //         cout << "YES\n";
-    //         for (int x : p1) cout << x + 1 << " ";
-    //         cout << "\n";
-    //         for (int x : p2) cout << x + 1 << " ";
-    //         cout << "\n";
-    //     }
-    // } else {
-    //     cout << "NO\n";
-    // }
 
     if (matching < 2) {
         cout << "NO\n";
