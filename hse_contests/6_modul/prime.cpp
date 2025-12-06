@@ -22,7 +22,8 @@ void int_test(int (*func)(T, Args...), T obj, Args... args) {
     std::cout << "function result is: " << func(obj, args...) << "\n";
 }
 
-void sieve_Er_nloglogn() {
+void sieve_Er_nloglogn() { // получается массив is , где is[x] = 1 если x простое
+    is[1] = 1 ;
     for ( int x = 2 ; x * x <= N ; x++) {
         if (!is[ x]) {
             for ( int y = x * x ; y <= N ; y += x) {
@@ -33,6 +34,13 @@ void sieve_Er_nloglogn() {
 }
 
 
+vector<int> inv( N + 1 , 0 );  // p = p /a * a + p % a 
+void inv_a(int p ) {
+    inv[1] = 1 ;
+    for (int a = 2 ;a <= N; a++) {
+        inv[a] = p/a * a  * ( - inv[p%a]) ; 
+    }
+}
 
 
 
@@ -104,6 +112,7 @@ std::pair<int,int > Evclid(int a , int b ) {
     return {y , x - y * (a / b)} ;
 }
 
+
 int obr_evclid( int a , int m  ) // a * x + m * y = 1 => x = a^-1 mod m
 {
     auto [x,y] = Evclid(a , m) ; 
@@ -141,6 +150,10 @@ long double fast( int a , int b ) {
 
 }
 
+//  дискретный log  
+// g^x =_p a . корневая оптимизация : x = y * \sqrt{p} + z 
+//  такая задача решается так : a/S положим в хэш-таблицу и поискать в 2 множестве  - это алгоритм дискретного лога за \sqrt{pls}
+
 
 
 
@@ -152,13 +165,6 @@ int main() {
 
     int_test(pow_a , 2 , 4) ;
     int_test(sum_a_log , 2 , 4) ;
-
-
-
-
-
-
-
 
 
     return 0;

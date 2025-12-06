@@ -7,26 +7,26 @@ using namespace std;
 const int N = 100010;
 
 int Next[N][26];
-bool is_end[N];int subtree_size[N];  
+bool is_end[N];int  [N];  
 int cnt = 1;
-bool sizes_dirty = true;
+// bool sizes_dirty = true;
 
 
-void calc_sizes(int v) {
-    if ( is_end[v] ) {
-        subtree_size[v] =1; 
-    }else {
-        subtree_size[v] = 0;
-    }
+// void calc_sizes(int v) {
+//     if ( is_end[v] ) {
+//         subtree_size[v] =1; 
+//     }else {
+//         subtree_size[v] = 0;
+//     }
     
-    for (int c = 0; c < 26; c++) {
-        if (Next[v][c] != -1) {
-            int to = Next[v][c];
-            calc_sizes(to);
-            subtree_size[v] += subtree_size[to];
-        }
-    }
-}
+//     for (int c = 0; c < 26; c++) {
+//         if (Next[v][c] != -1) {
+//             int to = Next[v][c];
+//             calc_sizes(to);
+//             subtree_size[v] += subtree_size[to];
+//         }
+//     }
+// }
 
 
 string find_kth(int k) {
