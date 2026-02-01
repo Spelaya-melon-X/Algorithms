@@ -140,6 +140,7 @@ int get_summ_devisors(int n ) { // omega_1
 
 
 
+// 
 tuple<int , int , int > evclid_advenced(int a , int b) {
     if ( b== 0 ) {
         return  {a , 1 , 0} ;
@@ -168,6 +169,35 @@ tuple<int, int , int >  iter_evclid_advenced(int a , int b) {
     return {r0 , x0 , y0} ;
 }
 
+int get_pow_a_by_log_n( int a , int n ) { // a^n = ( a^ 2)^ (n / 2 ) * ( 1 or a ) - за log n 
+    int res = 1 ; 
+    while ( n > 0) {
+        if ( n % 2 == 1) {
+            res *= a ; 
+        }
+        a *= a ; 
+        n /= 2 ;
+    }
+    return res ;
+}
+
+int get_obr_elem_mod_m_evclid_version(int a , int m ) {
+    auto [gcd , x, y] = evclid_advenced(a, m) ; 
+    if ( gcd != 1) {
+        return -1 ; 
+    }
+    return (x + m) % m ;
+}
+
+int get_obr_elem_mod_m_Eiler_version(int a , int m ) {
+    int phi_m = get_eiler_function(m)  ; 
+    return (get_pow_a_by_log_n(a , phi_m - 1 ) + m ) % m  ;
+
+}
+
+
+
+// алгоритмы для решения диофантовых уравнений : a * x + b * y = c , x,y \in \mathcal{Z}
 std::pair<int , int> Diofant_equation(int a , int b , int c) {
     auto [gcd , x , y] = iter_evclid_advenced(a , b) ; 
     if (c % gcd != 0) return {-1 , -1} ;
@@ -187,7 +217,6 @@ std::pair<std::string  ,std::string > Diofant_equation_full(int a , int b , int 
 
 
 int main() {
-    std::cout << get_summ_devisors(72) ; 
 
     return 0;
 }
